@@ -20,10 +20,17 @@ from telegram.ext import (
 )
 
 import json
-from storage import (
-    add_reminder, load_reminders, save_reminders, update_reminder_status,
-    delete_reminder, upsert_user_timezone, get_user_timezone
-)
+USE_MONGO = os.getenv("USE_MONGO", "0") == "1" or bool(os.getenv("MONGODB_URI"))
+if USE_MONGO:
+    from storage_mongo import (
+        add_reminder, load_reminders, save_reminders, update_reminder_status,
+        delete_reminder, upsert_user_timezone, get_user_timezone
+    )
+else:
+    from storage import (
+        add_reminder, load_reminders, save_reminders, update_reminder_status,
+        delete_reminder, upsert_user_timezone, get_user_timezone
+    )
 
 # ---- Conversation states ----
 ASK_WHEN, ASK_TEXT = range(2)

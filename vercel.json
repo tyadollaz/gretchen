@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "functions": {
+    "api/cron.py": {
+      "runtime": "python3.11"
+    }
+  },
+  "routes": [
+    { "src": "/api/cron/process-due", "dest": "/api/cron.py" }
+  ],
+  "crons": [
+    { "path": "/api/cron/process-due", "schedule": "* * * * *" }
+  ]
+}
